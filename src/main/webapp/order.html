@@ -2,19 +2,28 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>外卖平台 - 首页</title>
+    <title>外卖订单系统</title>
 </head>
 <body>
-<h1>欢迎来外卖平台</h1>
+<h1>外卖订单系统</h1>
+
+<h2>菜单列表</h2>
+<a href="http://localhost:8080/menu">查看所有菜单</a>
 
 <h2>新增订单</h2>
-
-<form action="/order" method="post">
-    用户: <input name="customer"><br>
-    食物: <input name="food"><br>
-    数量: <input name="quantity"><br>
-    <input type="submit">
+<form action="http://localhost:8080/order" method="post">
+    Customer Name: <input type="text" name="customer"><br>
+    Food Name: <input type="text" name="food"><br>
+    Quantity: <input type="number" name="quantity"><br>
+    <input type="submit" value="Place Order">
 </form>
 
+<h2>订单详情</h2>
+<p>创建订单后，点击以下链接查看订单详情：</p>
+<ul>
+    <li><a href="http://localhost:8080/order/1001">Order #1001</a></li>
+    <li><a href="http://localhost:8080/order/1002">Order #1002</a></li>
+    <li><a href="http://localhost:8080/order/1003">Order #1003</a></li>
+</ul>
 </body>
 </html>
