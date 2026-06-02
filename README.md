@@ -224,6 +224,68 @@ Error: quantity must be a valid number
 
 ---
 
+# **项目实现**
+
+## 项目结构
+
+```
+src/
+  main/
+    java/
+      cs/sbs/web/
+        DataStore.java               -- 内存数据存储（菜单 + 订单）
+        servlet/
+          MenuListServlet.java       -- GET /menu (Query Parameter)
+          OrderCreateServlet.java    -- POST /order (Form Parameter)
+          OrderDetailServlet.java    -- GET /order/{id} (Path Parameter)
+        model/
+          MenuItem.java              -- 菜单项模型
+          Order.java                 -- 订单模型
+    webapp/
+      order.html                     -- 首页（表单 + 超链接）
+      WEB-INF/
+        web.xml                      -- Servlet 映射配置
+  test/
+    run_all_tests.sh                 -- 自动评分脚本
+    test*.sh                         -- 10 个测试用例
+```
+
+## 功能说明
+
+| 功能 | 请求方式 | URL | 参数类型 |
+|------|---------|-----|----------|
+| 菜单列表 | GET | `/menu` | Query: `name`（可选，按名称搜索） |
+| 创建订单 | POST | `/order` | Form: `customer`, `food`, `quantity` |
+| 订单详情 | GET | `/order/{id}` | Path |
+
+### 异常处理
+
+- **参数缺失** → 返回 400 + `Error: missing parameter: {field}`
+- **数量不合法** → 返回 400 + `Error: quantity must be a valid number`
+- **订单不存在** → 返回 404 + `Error: Order not found`
+- **搜索无结果** → 返回 `No menu items found.`
+
+## 运行方式
+
+**要求：JDK 17 + Maven**
+
+启动服务：
+```bash
+mvn -q jetty:run
+```
+
+浏览器访问：
+```
+http://localhost:8080/
+```
+
+运行自动评分（需要先启动服务）：
+```bash
+bash src/test/run_all_tests.sh
+```
+
+---
+
 # **提交方式**
 
 提交内容包括：
